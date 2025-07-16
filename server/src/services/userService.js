@@ -1,7 +1,7 @@
 const { User } = require("../models/userModel");
 const bcryptjs = require('bcryptjs');
 
-async function register(username,email,password,profilePicureUrl) {
+async function register(username,email,password,profilePictureUrl) {
     const existingUser = await User.findOne({email})
 
     if(existingUser){
@@ -12,7 +12,7 @@ async function register(username,email,password,profilePicureUrl) {
         username,
         email,
         password: await bcryptjs.hash(password,10),
-        profilePicureUrl,
+        profilePictureUrl,
     })
     
     user.save();

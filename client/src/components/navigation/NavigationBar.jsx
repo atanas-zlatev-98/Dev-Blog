@@ -1,9 +1,14 @@
 import React from "react";
 import "./NavigationBar.style.scss";
-import { NavLink } from "react-router";
+import { NavLink} from "react-router";
 import { IoSearchSharp } from "react-icons/io5";
+import { useSelector } from "react-redux";
+
 
 const NavigationBar = () => {
+
+  const {userInfo} = useSelector((state)=> state.auth);
+
   return (
     <nav className="navbar">
       <div className="nav-header">
@@ -22,14 +27,20 @@ const NavigationBar = () => {
             </form>
           </div>
         </div>
-        <div className="auth">
+        {!userInfo ? ( <div className="auth">
           <NavLink className="nav-login-btn" to="/auth/login">
             Login
           </NavLink>
           <NavLink className="nav-register-btn" to="/auth/register">
             Create Account
           </NavLink>
-        </div>
+        </div>) : (
+          <div className="auth-logged">
+            <img src={userInfo.profilePictureUrl} alt='profile picture'></img>
+            <NavLink to='/profile'>{userInfo.username}</NavLink>
+          </div>
+        )}
+       
       </div>
     </nav>
   );
