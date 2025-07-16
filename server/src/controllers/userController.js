@@ -6,10 +6,10 @@ const userController = Router();
 userController.post("/auth/register", async (req, res) => {
   //TODO Password Validation
 
-  const { username, email, password } = req.body;
+  const { username, email, password,profilePicureUrl } = req.body;
 
   try {
-    const user = await register(username, email, password);
+    const user = await register(username, email, password,profilePicureUrl);
     const token = createToken(user);
 
     res.cookie("jwt", token, {
@@ -19,7 +19,7 @@ userController.post("/auth/register", async (req, res) => {
       maxAge: 1 * 24 * 60 * 60 * 1000,
     });
 
-    res.status(201).json({ _id: user._id, username: user.username, email: user.email });
+    res.status(201).json({ _id: user._id, username: user.username, email: user.email,profilePicureUrl:user.profilePicureUrl });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }

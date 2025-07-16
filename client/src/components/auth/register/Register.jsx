@@ -7,20 +7,14 @@ const Register = () => {
       <div className="form-container">
         <h1>Register.</h1>
         <form className="register-form">
-          <div className="form-group-name">
-            <input type="text" placeholder="First Name"></input>
-            <input type="text" placeholder="Last Name"></input>
-          </div>
           <div className="form-group">
             <input type="text" placeholder="Username"></input>
           </div>
           <div className="form-group">
             <input type="text" placeholder="Email"></input>
           </div>
-          <div className="form-group">
+          <div className="form-group-password">
             <input type="password" placeholder="Password"></input>
-          </div>
-          <div className="form-group">
             <input type="password" placeholder="Repeat Password"></input>
           </div>
           <div className="form-group">
