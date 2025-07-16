@@ -23,10 +23,10 @@ const NavigationBar = () => {
           </div>
         </div>
         <div className="auth">
-          <NavLink className="nav-login-btn" to="/login">
+          <NavLink className="nav-login-btn" to="/auth/login">
             Login
           </NavLink>
-          <NavLink className="nav-register-btn" to="/register">
+          <NavLink className="nav-register-btn" to="/auth/register">
             Create Account
           </NavLink>
         </div>
