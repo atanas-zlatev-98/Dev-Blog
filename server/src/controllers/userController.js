@@ -39,7 +39,7 @@ userController.post("/api/auth/login", async (req, res) => {
       maxAge: 1 * 24 * 60 * 60 * 1000,
     });
 
-    res.status(200).json({ _id: user._id, username: user.username, email: user.email });
+    res.status(200).json({ _id: user._id, username: user.username, email: user.email, profilePictureUrl:user.profilePictureUrl });
 
   } catch (err) {
     res.status(400).json({ message: err.message });

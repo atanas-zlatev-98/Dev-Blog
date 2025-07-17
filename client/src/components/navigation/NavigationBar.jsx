@@ -57,10 +57,10 @@ const NavigationBar = () => {
           </NavLink>
         </div>) : (
           <div className="auth-logged" onClick={setActive}>
-            <img className="img-hover" src={userInfo.profilePictureUrl} alt='profile picture'></img>
+            <img src={userInfo.profilePictureUrl} alt='profile picture'></img>
               <div className={`drop-down ${activeAuthUser ? 'active' : ''} `}>
                 <ul>
-                  <li>Profile</li>
+                  <li><NavLink to='/profile'>Profile</NavLink></li>
                   <li>Create-Post</li>
                   <li>My Posts</li>
                   <li>Drafts</li>

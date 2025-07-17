@@ -24,7 +24,7 @@ postController.post("/posts/create-post", protect, async (req, res) => {
     const posts = await createPost(post);
     res.status(201).json({ posts });
   } catch (err) {
-    throw new Error("err");
+   res.status(400).json({ message:err.message });
   }
 });
 

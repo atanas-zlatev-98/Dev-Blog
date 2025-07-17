@@ -118,9 +118,11 @@
     justify-content: space-between;
     align-items: center;
     gap: 10px;
+    cursor: pointer;
     img {
       width: 45px;
       height: 45px;
+      border-radius: 50px;
     }
   }
 }
@@ -129,7 +131,7 @@
   position: absolute;
   top: 60px;
   background-color: white;
-  padding: 20px;
+  padding: 15px;
   // border:1px solid rgb(172, 172, 172);;
   display: none;
   ul {
@@ -140,10 +142,18 @@
       overflow: hidden;
       padding: 7px;
       border-radius: 5px;
+      a{
+        color: black;
+        text-decoration: none;
+      }
       &:hover {
         background-color: black;
         color: white;
         cursor: pointer;
+
+        a {
+          color: white;
+        }
       }
     }
   }
