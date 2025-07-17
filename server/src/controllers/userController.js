@@ -46,7 +46,7 @@ userController.post("/api/auth/login", async (req, res) => {
   }
 });
 
-userController.get("/api/auth/logout", async (req, res) => {
+userController.post("/api/auth/logout", async (req, res) => {
    res.clearCookie('jwt')
    res.status(200).json({ message: "User logged Out" });
 });
