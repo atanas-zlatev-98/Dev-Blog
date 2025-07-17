@@ -39,9 +39,26 @@ const Register = () => {
     const submitHandler = async (e) => {
         e.preventDefault();
 
-        if(formValues.password !== formValues.rePassword){
-          throw new Error('passwords do not match!')
+        if(!formValues.username){
+          return toast.error('Username is required!')
         }
+        
+        if(!formValues.email){
+          return toast.error('Email field is required!')
+        }
+
+        if(!formValues.password || !formValues.rePassword){
+          return toast.error('Password fields are required!')
+        }
+        
+        if(formValues.password !== formValues.rePassword){
+          return toast.error('Passwords do not match!')
+        }
+
+        if(!formValues.profilePictureUrl){
+          return toast.error('Profile Picture URL is required!')
+        }
+
 
         try {
           const {username,email,password,profilePictureUrl} = formValues;
@@ -49,7 +66,7 @@ const Register = () => {
           dispatch(setCredentials({...response}));
           navigate('/');
         }catch(err){
-          throw new Error(err.message);
+          toast.error(err.message);
         }
 
     }
@@ -63,7 +80,7 @@ const Register = () => {
             <input type="text" placeholder="Username" name="username" value={formValues.username} onChange={changeHandler}></input>
           </div>
           <div className="form-group">
-            <input type="text" placeholder="Email" name="email" value={formValues.email} onChange={changeHandler}></input>
+            <input type="email" placeholder="Email" name="email" value={formValues.email} onChange={changeHandler}></input>
           </div>
           <div className="form-group-password">
             <input type="password" placeholder="Password" name="password" value={formValues.password} onChange={changeHandler}></input>

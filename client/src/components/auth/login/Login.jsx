@@ -38,6 +38,14 @@ const Login = () => {
   const submitHandler = async(e)=>{
     e.preventDefault();
 
+    if(!formValues.email){
+      return toast.error('Please enter email!')
+    }
+
+    if(!formValues.password){
+      return toast.error('Please enter password!')
+    }
+
     try{
       const response = await login(formValues).unwrap();
       dispatch(setCredentials({...response}))
