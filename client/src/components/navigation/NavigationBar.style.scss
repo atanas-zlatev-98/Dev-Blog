@@ -130,14 +130,17 @@
 .drop-down {
   position: absolute;
   top: 60px;
+  width: 150px;
   background-color: white;
   padding: 15px;
   // border:1px solid rgb(172, 172, 172);;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   display: none;
   ul {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    width: 100%;
     li {
       overflow: hidden;
       padding: 7px;
@@ -147,13 +150,8 @@
         text-decoration: none;
       }
       &:hover {
-        background-color: black;
-        color: white;
+        background-color: #ecf0f1;
         cursor: pointer;
-
-        a {
-          color: white;
-        }
       }
     }
   }

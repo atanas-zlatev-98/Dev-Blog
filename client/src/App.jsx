@@ -5,6 +5,7 @@ import NavigationBar from "./components/navigation/NavigationBar";
 import Login from "./components/auth/login/Login";
 import Register from "./components/auth/register/Register";
 import { ToastContainer } from "react-toastify";
+import CreatePost from "./components/pages/posts/create-post/CreatePost";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/auth/login" element={<Login />} />
             <Route path="/auth/register" element={<Register />} />
+            <Route path="/posts/create-post" element={<CreatePost/>} />
           </Routes>
         </div>
       </div>

@@ -1,4 +1,4 @@
-.main-login {
+.main-create {
     max-width: 1440px;
     // background-color: red;
     padding: 100px;
@@ -18,7 +18,7 @@
     padding: 20px;
     background-color: white;
 }
-.login-form{
+.create-form{
     width: 350px;
     padding: 20px;
     // background-color: blue;
@@ -34,7 +34,12 @@
         border: 1px solid rgb(206, 206, 206);
     }
 }
-
+.form-group-password {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    margin-bottom: 10px;
+}
 .form-group {
     display: flex;
     justify-content: center;
@@ -42,13 +47,25 @@
     width: 100%;
     margin-bottom: 10px;
 }
+.form-group-terms {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items:center;
+    flex-direction: row;
+    gap: 5px;
+    margin-bottom: 10px;
 
+    input {
+        display: flex;
+        width: 15px;
+    }
+}
 .btn-container {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 10px;
-    
     button {
         padding: 10px;
         width: 100px;
@@ -63,4 +80,12 @@
             cursor: pointer;
         }
     }
+}
+
+.text-area-content {
+    width: 100%;
+     padding: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 1px solid rgb(206, 206, 206);
 }

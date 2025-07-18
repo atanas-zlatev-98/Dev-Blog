@@ -61,7 +61,7 @@ const NavigationBar = () => {
               <div className={`drop-down ${activeAuthUser ? 'active' : ''} `}>
                 <ul>
                   <li><NavLink to='/profile'>Profile</NavLink></li>
-                  <li>Create-Post</li>
+                  <li><NavLink to='/posts/create-post'>Create-Post</NavLink></li>
                   <li>My Posts</li>
                   <li>Drafts</li>
                   <li>Saved Posts</li>

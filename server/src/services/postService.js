@@ -7,6 +7,7 @@ async function createPost(post) {
     content: post.content,
     author: post.author,
     imageUrl: post.imageUrl,
+    tags:post.tags,
   });
 
   const userId = post.author;

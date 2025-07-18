@@ -10,14 +10,15 @@ const {
 
 const postController = Router();
 
-postController.post("/posts/create-post", protect, async (req, res) => {
-  const { title, content, imageUrl } = req.body;
-
+postController.post("/api/posts/create-post", protect, async (req, res) => {
+  const { title, content, imageUrl,tags } = req.body;
+  console.log(tags)
   const post = {
     title: title,
     content: content,
     author: req.user._id,
     imageUrl: imageUrl,
+    tags,
   };
 
   try {
@@ -28,7 +29,7 @@ postController.post("/posts/create-post", protect, async (req, res) => {
   }
 });
 
-postController.get("/posts", async (req, res) => {
+postController.get("/api/posts", async (req, res) => {
   try {
     const posts = await getPosts();
     res.status(200).json({ posts });
@@ -37,7 +38,7 @@ postController.get("/posts", async (req, res) => {
   }
 });
 
-postController.get("/posts/:postId", async (req, res) => {
+postController.get("/api/posts/:postId", async (req, res) => {
   const postId = req.params.postId;
 
   try {
@@ -48,7 +49,7 @@ postController.get("/posts/:postId", async (req, res) => {
   }
 });
 
-postController.put("/posts/edit/:postId", protect,async (req, res) => {
+postController.put("/api/posts/edit/:postId", protect,async (req, res) => {
 
   const postId = req.params.postId;
   const userId = req.user._id;
@@ -75,7 +76,7 @@ postController.put("/posts/edit/:postId", protect,async (req, res) => {
   }
 });
 
-postController.delete("/posts/delete/:postId", protect, async (req, res) => {
+postController.delete("/api/posts/delete/:postId", protect, async (req, res) => {
   const postId = req.params.postId;
   const userId = req.user._id;
 
@@ -92,7 +93,7 @@ postController.delete("/posts/delete/:postId", protect, async (req, res) => {
   }
 });
 
-postController.put("/posts/:postId/react", async (req, res) => {});
+postController.put("/api/posts/:postId/react", async (req, res) => {});
 
 module.exports = {
   postController,
