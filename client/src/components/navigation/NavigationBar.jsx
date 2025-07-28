@@ -63,7 +63,7 @@ const NavigationBar = () => {
                   <li><NavLink to='/profile'>Profile</NavLink></li>
                   <li><NavLink to='/posts/create-post'>Create-Post</NavLink></li>
                   <li>My Posts</li>
-                  <li>Drafts</li>
+                  <li>My Drafts</li>
                   <li>Saved Posts</li>
                   <li onClick={logoutHandler}>Logout</li>
                 </ul>
