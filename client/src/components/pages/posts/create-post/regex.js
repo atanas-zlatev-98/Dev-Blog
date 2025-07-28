@@ -1,0 +1,1 @@
+export const onlyLettersAllowed = /^[A-Za-z]+$/

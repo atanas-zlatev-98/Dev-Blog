@@ -4,6 +4,7 @@ import { NavLink, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { useCreatePostMutation } from "../../../../redux/slices/postsApiSlice";
 import "./CreatePost.style.scss";
+import { onlyLettersAllowed } from "./regex.js";
 
 const initialValues = {
   title: "",
@@ -43,6 +44,16 @@ const CreatePost = () => {
     }
 
     const tags = formValues.tags.trim().split(" ");
+
+    const matches = tags.every(tag => onlyLettersAllowed.test(tag))
+
+    if(!matches){
+      return toast.error('Tags must not contain special characters/numbers or empty spaces, and not exceed 5!')
+    }
+
+    if(tags.length > 5){
+      return toast.error('Must not have more than 5 tags!')
+    }
 
     try {
       const result = await createNewPost({ ...formValues, tags });
