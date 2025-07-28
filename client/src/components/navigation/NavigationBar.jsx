@@ -39,12 +39,12 @@ const NavigationBar = () => {
           </NavLink>
           <div className="search">
             <form className="search-form">
-              <button><IoSearchSharp /></button>
               <input
                 type="text"
                 placeholder="Search..."
                 className="search-field"
               ></input>
+              <button><IoSearchSharp /></button>
             </form>
           </div>
         </div>
