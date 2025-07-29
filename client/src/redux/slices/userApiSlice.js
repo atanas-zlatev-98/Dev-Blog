@@ -23,8 +23,15 @@ export const usersApiSlice = apiSlice.injectEndpoints({
                 method:'POST',
                 body:data,
             })
+        }),
+        creatorFind:builder.mutation({
+            query:(creatorId)=>({
+                url:`${USER_URL}/creator`,
+                method:'POST',
+                body:creatorId
+            })
         })
     })
 })
 
-export const {useLoginMutation,useLogoutMutation,useRegisterMutation} = usersApiSlice;
+export const {useLoginMutation,useLogoutMutation,useRegisterMutation,useCreatorFindMutation} = usersApiSlice;

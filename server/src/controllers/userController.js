@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { register, login } = require("../services/userService");
+const { register, login, findCreator } = require("../services/userService");
 const { createToken } = require("../services/jwt");
 const userController = Router();
 
@@ -53,6 +53,17 @@ userController.post("/api/auth/logout", async (req, res) => {
 
 userController.get('/profile',async(req,res)=>{
   
+})
+
+userController.post('/api/auth/creator',async(req,res)=>{
+  const {creatorId} = req.body;
+  console.log(req.body);
+  try{
+    const user = await findCreator(creatorId);
+    res.status(200).json({username:user.username,email:user.email,posts:user.posts,imageUrl:user.profilePictureUrl});
+  }catch(err){
+    res.status(404).json(err.message);
+  }
 })
 
 module.exports = {

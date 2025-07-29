@@ -36,7 +36,18 @@ async function login(email,password) {
 
 }
 
+async function findCreator(creatorId) {
+    const user = await User.findById(creatorId);
+
+    if(!user){
+        throw new Error('Creator not found!');
+    }
+
+    return user;
+    
+}
+
 
 module.exports= {
-    register,login
+    register,login,findCreator
 }
