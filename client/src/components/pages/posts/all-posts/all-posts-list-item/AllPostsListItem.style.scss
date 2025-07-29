@@ -1,4 +1,48 @@
 .mini-post-container {
     max-width: 100%;
-    background-color: red;
+    padding: 10px 25px;
+    background-color: white;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgb(223, 223, 223);
+    .post {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+.author-data {
+    display: flex;
+    .author {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+    .author-img {
+        width: 35px;
+        height: 35px;
+    }
+}
+
+.post-data {
+    padding-left: 40px;
+    display: flex;
+    flex-direction:column;
+    gap: 10px;
+    h2 {
+        font-size: 2.5rem;
+    }
+
+    .post-tags {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+    }
+
+    .post-reactions {
+        display: flex;
+        flex-direction: row; 
+        justify-content: space-between
+    }
 }
