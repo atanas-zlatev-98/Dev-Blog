@@ -1,1 +1,1 @@
-Project is still in development, this is my first full stack web application, code is probably sh$t don't judge me :D .
+Project is still in development, this is my first full stack web application, code is probably sh$t don't judge me :D. The project is far from done, still have alot to do, most of the code will be refactored during the development. Will add a better README once i am done. :)
