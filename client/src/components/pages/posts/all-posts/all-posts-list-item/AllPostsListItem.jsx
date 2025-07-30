@@ -3,13 +3,25 @@ import "./AllPostsListItem.style.scss";
 import { NavLink } from "react-router";
 import moment from "moment";
 import { useCreatorFindMutation } from "../../../../../redux/slices/userApiSlice";
+import { FaRegComment, FaRegBookmark } from "react-icons/fa6";
 
-const AllPostsListItem = ({_id,title,author,createdAt,tags,comments,reactions}) => {
-
+const AllPostsListItem = ({
+  _id,
+  title,
+  author,
+  createdAt,
+  tags,
+  comments,
+  reactions,
+}) => {
   const [postAuthor, setPostAuthor] = useState({});
   const [creatorFind, { isLoading }] = useCreatorFindMutation();
 
-  const formattedDate = moment(createdAt).utc().format("DD/MMMM");
+  const formattedDate = moment(createdAt)
+    .utc()
+    .format("DD/MMMM")
+    .split("/")
+    .join(" ");
 
   useEffect(() => {
     const findAuthor = async () => {
@@ -23,42 +35,52 @@ const AllPostsListItem = ({_id,title,author,createdAt,tags,comments,reactions}) 
     findAuthor();
   }, [author]);
 
-  if(isLoading || !postAuthor){
-    return <p>Loading...</p>
+  if (isLoading || !postAuthor) {
+    return <p>Loading...</p>;
   }
 
   return (
-    <NavLink to={`/posts/${_id}`} className="mini-post-container">
+    <div className="mini-post-container">
       <div className="post">
         <div className="author-data">
-          <div className="author">
-            <img
-              className="author-img"
-              src={postAuthor.imageUrl}
-            ></img>
-            <div>
-              <p>{postAuthor.username}</p>
+          <NavLink to={`/creator/${postAuthor.username}`} className="author">
+            <img className="author-img" src={postAuthor.imageUrl}></img>
+            <div className="author-name">
+              <h4>{postAuthor.username}</h4>
               <p>{formattedDate}</p>
             </div>
-          </div>
+          </NavLink>
         </div>
         <div className="post-data">
           <div className="post-title">
-            <h2>{title}</h2>
+            <NavLink to={`/posts/${_id}`}><h2>{title}</h2></NavLink>
           </div>
           <div className="post-tags">
             {tags.map((tag) => (
-              <p key={tag}>#{tag}</p>
+              <NavLink to={`/tags/${tag}`} key={tag}>#{tag}</NavLink>
             ))}
           </div>
           <div className="post-reactions">
-            <div>Reactions: {reactions.length}</div>
-            <div>Comments {comments.length}</div>
-            <div>Save Post</div>
+            <div className="reactions">
+              <div className="reacts">
+                <NavLink to={`/posts/${_id}`}>Reactions: {reactions.length}</NavLink></div>
+              {comments.length <= 0 ? (
+                <div className="comments">
+                  <NavLink to={`/posts/${_id}`}><FaRegComment />Add Comment</NavLink>
+                </div>
+              ) : (
+                <div className="comments">
+                 <NavLink to={`/posts/${_id}`}> <FaRegComment /> {comments.length} Comments</NavLink>
+                </div>
+              )}
+            </div>
+            <div className="save">
+              <FaRegBookmark />
+            </div>
           </div>
         </div>
       </div>
-    </NavLink>
+    </div>
   );
 };
 

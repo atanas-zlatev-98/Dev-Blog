@@ -1,48 +1,174 @@
 .mini-post-container {
-    max-width: 100%;
-    padding: 10px 25px;
-    background-color: white;
-    border-radius: 5px;
+  max-width: 100%;
+  padding: 20px 25px;
+  background-color: white;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid rgb(223, 223, 223);
+  text-decoration: none;
+
+  &:hover {
+    border: 2px solid #3b49df;
+  }
+  .post {
     display: flex;
     flex-direction: column;
-    border: 1px solid rgb(223, 223, 223);
-    .post {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
+    gap: 5px;
+  }
 }
 .author-data {
+  display: flex;
+
+  .author {
     display: flex;
-    .author {
-        display: flex;
-        align-items: center;
-        gap: 5px;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+    padding: 5px;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: #3b49df;
+
+      .author-name {
+        color: white;
+        h4 {
+          color: white;
+        }
+      }
     }
-    .author-img {
-        width: 35px;
-        height: 35px;
+
+    .author-name {
+      color: rgb(69, 69, 69);
+      h4 {
+        color: black;
+      }
+      p {
+        font-size: 12px;
+      }
     }
+  }
+  .author-img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50px;
+    object-fit: cover;
+  }
 }
 
 .post-data {
-    padding-left: 40px;
+  padding-left: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  h2 {
+    font-size: 2.5rem;
+    color: black;
+    text-decoration: none;
     display: flex;
-    flex-direction:column;
+
+    &:hover {
+      color: #3b49df;
+    }
+  }
+  .post-title {
+    a {
+      text-decoration: none;
+    }
+  }
+
+  .post-tags {
+    display: flex;
+    flex-direction: row;
     gap: 10px;
-    h2 {
-        font-size: 2.5rem;
+
+    a {
+      color: black;
+      background-color: #3b49df;
+      color: white;
+      border: 1px solid #3b49df;
+      border-radius: 5px;
+      padding: 0px 5px;
+      text-decoration: none;
+
+      &:hover {
+        background-color: #3b49df4c;
+      }
+    }
+  }
+
+  .post-reactions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .reactions {
+      display: flex;
+      align-items: center;
+      gap: 50px;
+
+      .reacts {
+        padding: 5px;
+        border-radius: 5px;
+        cursor: pointer;
+
+        a {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          color: black;
+          text-decoration: none;
+        }
+
+        &:hover {
+          background-color: #3b49df;
+          
+          a {
+            color: white;
+          }
+        }
+      }
+      .comments {
+        padding: 5px;
+        border-radius: 5px;
+        cursor: pointer;
+
+        a {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          color: black;
+          text-decoration: none;
+        }
+        &:hover {
+          background-color: #3b49df;
+          //   color: white;
+
+          a {
+            color: white;
+          }
+        }
+      }
     }
 
-    .post-tags {
-        display: flex;
-        flex-direction: row;
-        gap: 10px;
+    div {
+      align-items: center;
+      display: flex;
+      gap: 5px;
     }
 
-    .post-reactions {
-        display: flex;
-        flex-direction: row; 
-        justify-content: space-between
+    .save {
+      font-size: 20px;
+      padding: 5px;
+      border-radius: 5px;
+      cursor: pointer;
+      &:hover {
+        background-color: #3b49df;
+        color: white;
+        padding: 5px;
+      }
     }
+  }
 }
