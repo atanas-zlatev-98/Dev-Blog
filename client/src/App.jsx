@@ -6,6 +6,7 @@ import Login from "./components/auth/login/Login";
 import Register from "./components/auth/register/Register";
 import { ToastContainer } from "react-toastify";
 import CreatePost from "./components/pages/posts/create-post/CreatePost";
+import SinglePost from "./components/pages/posts/single-post/SinglePost";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
             <Route path="/auth/login" element={<Login />} />
             <Route path="/auth/register" element={<Register />} />
             <Route path="/posts/create-post" element={<CreatePost/>} />
+            <Route path="/posts/:postId" element={<SinglePost/>} />
           </Routes>
         </div>
       </div>

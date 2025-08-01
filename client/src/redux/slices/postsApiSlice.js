@@ -18,8 +18,15 @@ export const postsApiSlice = apiSlice.injectEndpoints({
                 method:'GET',
             }),
             invalidatesTags:['Post']
+        }),
+        getSinglePost:builder.mutation({
+            query:(postId)=>({
+                url:`${POST_URL}/${postId}`,
+                method:'GET',
+            }),
+            invalidatesTags:['Post']
         })
     })
 })
 
-export const {useCreatePostMutation,useGetAllPostsMutation} = postsApiSlice;
+export const {useCreatePostMutation,useGetAllPostsMutation,useGetSinglePostMutation} = postsApiSlice;

@@ -42,8 +42,8 @@ postController.get("/api/posts/:postId", async (req, res) => {
   const postId = req.params.postId;
 
   try {
-    const result = await getSinglePost(postId);
-    res.status(200).json({ result });
+    const post = await getSinglePost(postId);
+    res.status(200).json(post);
   } catch (err) {
     res.status(404).json({ message: err.message });
   }

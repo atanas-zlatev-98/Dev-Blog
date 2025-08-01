@@ -5,23 +5,12 @@ import moment from "moment";
 import { useCreatorFindMutation } from "../../../../../redux/slices/userApiSlice";
 import { FaRegComment, FaRegBookmark } from "react-icons/fa6";
 
-const AllPostsListItem = ({
-  _id,
-  title,
-  author,
-  createdAt,
-  tags,
-  comments,
-  reactions,
-}) => {
+const AllPostsListItem = ({_id,title,author,createdAt,tags,comments,reactions}) => {
+  
   const [postAuthor, setPostAuthor] = useState({});
   const [creatorFind, { isLoading }] = useCreatorFindMutation();
 
-  const formattedDate = moment(createdAt)
-    .utc()
-    .format("DD/MMMM")
-    .split("/")
-    .join(" ");
+  const formattedDate = moment(createdAt).utc().format("DD/MMMM").split("/").join(" ");
 
   useEffect(() => {
     const findAuthor = async () => {
