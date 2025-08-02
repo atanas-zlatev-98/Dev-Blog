@@ -41,7 +41,7 @@ async function deletePost(postId, userId) {
 }
 
 async function getPosts() {
-  const posts = await Post.find();
+  const posts = await Post.find().sort({createdAt: -1});
   return posts;
 }
 
