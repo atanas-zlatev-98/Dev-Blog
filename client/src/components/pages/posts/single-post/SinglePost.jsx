@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import "./SinglePost.style.scss";
+import { useSelector } from "react-redux";
 import { NavLink, useParams } from "react-router";
 import { useGetSinglePostMutation } from "../../../../redux/slices/postsApiSlice";
 import { useCreatorFindMutation } from "../../../../redux/slices/userApiSlice";
 import { toast } from "react-toastify";
-import moment from "moment";
 import { FaRegBookmark } from "react-icons/fa6";
 import Author from "./author/Author";
 import AuthorPostsList from "./author/authorPostsList/AuthorPostsList";
+import PostComments from "./comments/PostComments";
+import moment from "moment";
+import SinglePostCommentsList from "./comments/SinglePostCommentsList/SinglePostCommentsList";
 
 const SinglePost = () => {
   const [singlePost, setSinglePost] = useState({});
@@ -18,6 +20,16 @@ const SinglePost = () => {
   const { postId } = useParams();
   const [getSinglePost] = useGetSinglePostMutation();
   const [creatorFind] = useCreatorFindMutation();
+
+  const handleComments = (newPostData) => {
+    setSinglePost((oldState) => ({
+      ...oldState,
+        ...newPostData,
+    comments: [
+      ...(newPostData.comments || oldState.comments || [])
+    ]
+    }));
+  };
 
   useEffect(() => {
     const findPost = async () => {
@@ -85,19 +97,14 @@ const SinglePost = () => {
           </div>
 
           <div className="post-comments">
-            <h2>Comments: {`(${singlePost.comments?.length})`}</h2>
-            <div className="comment">
-              <img
-                className="current-user"
-                src={userInfo.profilePictureUrl}
-              ></img>
-              <form>
-                <textarea placeholder="Comment..."></textarea>
-                <button type="submit">Post Comment</button>
-              </form>
-            </div>
+            <PostComments
+              userInfo={userInfo}
+              postId={postId}
+              singlePost={singlePost}
+              onCommentAdded={handleComments}
+            />
             <div className="comments">
-              <h2>Comming soon</h2>
+              {singlePost.comments?.length <=0 ? <p className="no-comments">No Comments</p> : <SinglePostCommentsList comments={singlePost?.comments}/>}
             </div>
           </div>
         </div>
@@ -108,7 +115,12 @@ const SinglePost = () => {
         </div>
 
         <div className="author-posts">
-          <h3>More from <NavLink to={`/creator/${postAuthor.username}`}>{postAuthor.username}</NavLink></h3>
+          <h3>
+            More from{" "}
+            <NavLink to={`/creator/${postAuthor.username}`}>
+              {postAuthor.username}
+            </NavLink>
+          </h3>
           <AuthorPostsList creator={postAuthor}></AuthorPostsList>
         </div>
       </div>

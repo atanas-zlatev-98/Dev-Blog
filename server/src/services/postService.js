@@ -70,4 +70,18 @@ async function updatePost(postId,userId,postData) {
     return newPost
 }
 
-module.exports = { createPost, deletePost, getPosts, getSinglePost,updatePost };
+async function postComment(postId,commentData) {
+  
+  const post = await Post.findById(postId);
+
+  if(!post){
+    throw new Error('Post Not Found!');
+  }
+
+  // console.log(post)
+  post.comments.push(commentData);
+  await post.save();
+
+  return post
+}
+module.exports = { createPost, deletePost, getPosts, getSinglePost,updatePost,postComment };

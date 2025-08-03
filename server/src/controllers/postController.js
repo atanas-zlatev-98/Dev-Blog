@@ -6,6 +6,7 @@ const {
   getPosts,
   getSinglePost,
   updatePost,
+  postComment,
 } = require("../services/postService");
 
 const postController = Router();
@@ -94,6 +95,23 @@ postController.delete("/api/posts/delete/:postId", protect, async (req, res) => 
 });
 
 postController.put("/api/posts/:postId/react", async (req, res) => {});
+
+postController.post('/api/posts/:postId/comment',async(req,res)=>{
+
+  const {authorId,comment} = req.body;
+  const postId = req.params.postId;
+
+  try{
+    const result = await postComment(postId,{authorId,comment})
+
+    if(result){
+      res.status(201).json(result);
+    }
+  }catch(err){
+      res.status(500).json({message:err.message})
+  }
+
+})
 
 module.exports = {
   postController,
