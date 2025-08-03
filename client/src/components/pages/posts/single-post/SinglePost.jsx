@@ -7,6 +7,8 @@ import { useCreatorFindMutation } from "../../../../redux/slices/userApiSlice";
 import { toast } from "react-toastify";
 import moment from "moment";
 import { FaRegBookmark } from "react-icons/fa6";
+import Author from "./author/Author";
+import AuthorPostsList from "./author/authorPostsList/AuthorPostsList";
 
 const SinglePost = () => {
   const [singlePost, setSinglePost] = useState({});
@@ -100,7 +102,16 @@ const SinglePost = () => {
           </div>
         </div>
       </div>
-      <div className="single-post-author"></div>
+      <div className="single-post-author">
+        <div className="author-info">
+          <Author {...postAuthor} />
+        </div>
+
+        <div className="author-posts">
+          <h3>More from <NavLink to={`/creator/${postAuthor.username}`}>{postAuthor.username}</NavLink></h3>
+          <AuthorPostsList creator={postAuthor}></AuthorPostsList>
+        </div>
+      </div>
     </div>
   );
 };

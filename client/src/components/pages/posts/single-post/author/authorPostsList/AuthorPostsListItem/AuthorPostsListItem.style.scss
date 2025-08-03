@@ -1,0 +1,25 @@
+.mini-post {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    h4{
+        color: gray;
+    }
+
+    .tags {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        color: gray;
+    }
+
+    &:hover {
+        h4 {
+            color: #3b49df;
+        }
+        .tags p {
+            color: #3b49df;
+        }
+    }
+}

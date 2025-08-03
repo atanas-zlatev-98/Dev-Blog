@@ -60,7 +60,7 @@ userController.post('/api/auth/creator',async(req,res)=>{
   console.log(req.body);
   try{
     const user = await findCreator(creatorId);
-    res.status(200).json({username:user.username,email:user.email,posts:user.posts,imageUrl:user.profilePictureUrl});
+    res.status(200).json({_id:user._id,username:user.username,email:user.email,posts:user.posts,imageUrl:user.profilePictureUrl,createdAt:user.createdAt});
   }catch(err){
     res.status(404).json(err.message);
   }
