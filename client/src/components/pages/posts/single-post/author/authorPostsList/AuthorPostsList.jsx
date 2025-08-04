@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import AuthorPostsListItem from './AuthorPostsListItem/AuthorPostsListItem'
 
 const AuthorPostsList = ({creator}) => {

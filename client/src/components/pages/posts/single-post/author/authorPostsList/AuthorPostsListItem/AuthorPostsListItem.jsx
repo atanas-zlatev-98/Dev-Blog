@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useGetSinglePostMutation } from "../../../../../../../redux/slices/postsApiSlice";
 import { NavLink } from "react-router";
 import './AuthorPostsListItem.style.scss';
 
 const AuthorPostsListItem = ({ postId }) => {
+  
   const [getPost, setGetPost] = useState({});
   const [getSinglePost] = useGetSinglePostMutation();
 

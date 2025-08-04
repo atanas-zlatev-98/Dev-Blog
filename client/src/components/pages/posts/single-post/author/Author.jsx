@@ -1,7 +1,7 @@
-import React from "react";
 import "./Author.style.scss";
 import { NavLink } from "react-router";
 import moment from "moment";
+
 const Author = ({ ...author }) => {
 
   const formattedDate = moment(author.createdAt)
@@ -15,7 +15,7 @@ const Author = ({ ...author }) => {
       <div className="header-line"></div>
       <NavLink to={`/creator/${author.username}`}>
         <div className="author-data">
-          <img src={author.imageUrl} alt={author.username}></img>
+          <img src={author.imageUrl} alt='author image'/>
           <p>{author.username}</p>
           
         </div>

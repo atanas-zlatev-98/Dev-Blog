@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import {useState } from "react";
 import { useCommentPostMutation } from "../../../../../redux/slices/postsApiSlice";
-import { useNavigate } from "react-router";
 
 const initialState = {
   authorId: "",
@@ -42,7 +41,7 @@ const PostComments = ({ userInfo, postId, singlePost, onCommentAdded }) => {
     <>
       <h2>Comments: {`(${singlePost.comments?.length})`}</h2>
       {userInfo ? (<div className="comment">
-        <img className="current-user" src={userInfo.profilePictureUrl}></img>
+        <img className="current-user" src={userInfo.profilePictureUrl} alt={userInfo.username}/>
         <form onSubmit={submitHandler}>
           <textarea
             name="comment"

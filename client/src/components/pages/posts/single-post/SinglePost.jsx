@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./SinglePost.style.scss";
 import { useSelector } from "react-redux";
 import { NavLink, useParams } from "react-router";
@@ -63,7 +63,7 @@ const SinglePost = () => {
           <NavLink to={`/creator/${postAuthor.username}`}>
             <div className="author">
               <div className="author-img">
-                <img src={postAuthor.imageUrl} alt={postAuthor.username}></img>
+                <img src={postAuthor.imageUrl} alt={postAuthor.username}/>
               </div>
               <div className="author-data">
                 <h4>{postAuthor.username}</h4>
@@ -79,7 +79,7 @@ const SinglePost = () => {
         </div>
         <div className="post-content">
           <h1>{singlePost.title}</h1>
-          <img src={singlePost.imageUrl} alt={singlePost.title}></img>
+          <img src={singlePost.imageUrl} alt={singlePost.title}/>
           <div className="tags-and-reactions">
             <div className="tags">
               {singlePost.tags?.map((tag) => (

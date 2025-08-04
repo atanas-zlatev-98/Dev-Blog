@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useCreatorFindMutation } from "../../../../../../redux/slices/userApiSlice";
 import "./SinglePostCommentsListItem.style.scss";
 import { NavLink } from "react-router";
@@ -32,7 +32,7 @@ export const SinglePostCommentsListItem = ({
     <div className="comments-container">
       <div className="author">
         <NavLink to={`/creator/${author.username}`}>
-          <img src={author.imageUrl}></img>
+          <img src={author.imageUrl} alt={author.username}/>
         </NavLink>
       </div>
       <div className="comment-content">

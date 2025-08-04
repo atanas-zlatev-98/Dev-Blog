@@ -44,7 +44,7 @@ const NavigationBar = () => {
                 placeholder="Search..."
                 className="search-field"
               ></input>
-              <button><IoSearchSharp /></button>
+              <button type="submit"><IoSearchSharp /></button>
             </form>
           </div>
         </div>
