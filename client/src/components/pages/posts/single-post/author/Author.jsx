@@ -4,11 +4,7 @@ import moment from "moment";
 
 const Author = ({ ...author }) => {
 
-  const formattedDate = moment(author.createdAt)
-    .utc()
-    .format("DD/MMMM/YYYY")
-    .split("/")
-    .join(" ");
+  const formattedDate = moment(author.createdAt).utc().format("DD/MMMM/YYYY").split("/").join(" ");
 
   return (
     <div className="author-container">

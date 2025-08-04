@@ -50,11 +50,11 @@ export const useCreatePost = () => {
 
     try {
 
-      const response = await createPost({ ...formValues, tags: postTags });
-
-      if (response) {
+      const post = await createPost({ ...formValues, tags: postTags }).unwrap();
+      
+      if (post) {
         toast.success("Post created successfully!");
-        navigate("/");
+        navigate(`/posts/${post._id}`);
       }
 
     } catch (err) {

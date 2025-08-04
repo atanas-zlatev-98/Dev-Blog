@@ -24,7 +24,7 @@ postController.post("/api/posts/create-post", protect, async (req, res) => {
 
   try {
     const posts = await createPost(post);
-    res.status(201).json({ posts });
+    res.status(201).json(posts);
   } catch (err) {
    res.status(400).json({ message:err.message });
   }
@@ -33,7 +33,7 @@ postController.post("/api/posts/create-post", protect, async (req, res) => {
 postController.get("/api/posts", async (req, res) => {
   try {
     const posts = await getPosts();
-    res.status(200).json({ posts });
+    res.status(200).json(posts);
   } catch (err) {
     res.status(204).json({ message: err.message });
   }

@@ -1,41 +1,28 @@
-import React, { useEffect, useState } from "react";
 import "./AllPostsListItem.style.scss";
 import { NavLink } from "react-router";
-import moment from "moment";
-import { useCreatorFindMutation } from "../../../../../redux/slices/userApiSlice";
 import { FaRegComment, FaRegBookmark } from "react-icons/fa6";
+import { useAuthor } from "../../../../hooks/useAuthor";
+import moment from "moment";
 
-const AllPostsListItem = ({_id,title,author,createdAt,tags,comments,reactions}) => {
+const AllPostsListItem = ({_id,title,author:authorId,createdAt,tags,comments,reactions}) => {
   
-  const [postAuthor, setPostAuthor] = useState({});
-  const [creatorFind, { isLoading }] = useCreatorFindMutation();
+  const {author,isLoading} = useAuthor(authorId);
 
   const formattedDate = moment(createdAt).utc().format("DD/MMMM").split("/").join(" ");
 
-  useEffect(() => {
-    const findAuthor = async () => {
-      try {
-        const user = await creatorFind({ creatorId: author }).unwrap();
-        setPostAuthor(user);
-      } catch (err) {
-        console.log(err.message);
-      }
-    };
-    findAuthor();
-  }, [author]);
 
-  if (isLoading || !postAuthor) {
-    return <p>Loading...</p>;
-  }
+  // if (isLoading || !author) {
+  //   return <p>Loading...</p>;
+  // }
 
   return (
     <div className="mini-post-container">
       <div className="post">
         <div className="author-data">
-          <NavLink to={`/creator/${postAuthor.username}`} className="author">
-            <img className="author-img" src={postAuthor.imageUrl}></img>
+          <NavLink to={`/creator/${author.username}`} className="author">
+            <img className="author-img" src={author.imageUrl} alt={author.username}></img>
             <div className="author-name">
-              <h4>{postAuthor.username}</h4>
+              <h4>{author.username}</h4>
               <p>{formattedDate}</p>
             </div>
           </NavLink>

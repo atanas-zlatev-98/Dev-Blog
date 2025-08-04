@@ -1,31 +1,16 @@
-import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
-import { useGetSinglePostMutation } from "../../../../../../../redux/slices/postsApiSlice";
 import { NavLink } from "react-router";
 import './AuthorPostsListItem.style.scss';
+import { useSinglePost } from "../../../../../../hooks/useSinglePost";
 
 const AuthorPostsListItem = ({ postId }) => {
   
-  const [getPost, setGetPost] = useState({});
-  const [getSinglePost] = useGetSinglePostMutation();
-
-  useEffect(() => {
-    const findPost = async () => {
-      try {
-        const postResponse = await getSinglePost(postId).unwrap();
-        setGetPost(postResponse);
-      } catch (err) {
-        toast.error(err.message);
-      }
-    };
-
-    findPost();
-  }, []);
+  const {singlePost} = useSinglePost(postId);
+ 
   return (
-    <NavLink className='mini-post' to={`/posts/${getPost._id}`}>
-      <h4>{getPost.title}</h4>
+    <NavLink className='mini-post' to={`/posts/${singlePost._id}`}>
+      <h4>{singlePost.title}</h4>
       <div className="tags">
-        {getPost.tags?.map(tag => <p key={tag}>#{tag}</p>)}
+        {singlePost.tags?.map(tag => <p key={tag}>#{tag}</p>)}
       </div>
     </NavLink>
   );

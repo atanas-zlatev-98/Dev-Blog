@@ -1,9 +1,9 @@
 import AuthorPostsListItem from './AuthorPostsListItem/AuthorPostsListItem'
 
-const AuthorPostsList = ({creator}) => {
+const AuthorPostsList = ({author}) => {
   return (
    <div>
-        {creator.posts?.map(post => <AuthorPostsListItem key={post} postId={post}></AuthorPostsListItem>)}
+        {author.posts?.map(post => <AuthorPostsListItem key={post} postId={post}></AuthorPostsListItem>)}
    </div>
   )
 }

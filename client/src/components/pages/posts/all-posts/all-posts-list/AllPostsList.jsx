@@ -12,8 +12,8 @@ const AllPostsList = () => {
   useEffect(() => {
     const getPosts = async () => {
       try {
-        const response = await getAllPosts().unwrap();
-        setAllPosts(response.posts);
+        const posts = await getAllPosts().unwrap();
+        setAllPosts(posts);
       } catch (err) {
         toast.err(err.message);
       }

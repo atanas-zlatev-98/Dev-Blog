@@ -11,62 +11,31 @@ import AuthorPostsList from "./author/authorPostsList/AuthorPostsList";
 import PostComments from "./comments/PostComments";
 import moment from "moment";
 import SinglePostCommentsList from "./comments/SinglePostCommentsList/SinglePostCommentsList";
+import { useSinglePost } from "../../../hooks/useSinglePost";
+import { useAuthor } from "../../../hooks/useAuthor";
 
 const SinglePost = () => {
-  const [singlePost, setSinglePost] = useState({});
-  const [postAuthor, setPostAuthor] = useState({});
+
   const { userInfo } = useSelector((state) => state.auth);
-
   const { postId } = useParams();
-  const [getSinglePost] = useGetSinglePostMutation();
-  const [creatorFind] = useCreatorFindMutation();
 
-  const handleComments = (newPostData) => {
-    setSinglePost((oldState) => ({
-      ...oldState,
-        ...newPostData,
-    comments: [
-      ...(newPostData.comments || oldState.comments || [])
-    ]
-    }));
-  };
+  const { singlePost, handleComments } = useSinglePost(postId);
+  const { author } = useAuthor(singlePost.author);
 
-  useEffect(() => {
-    const findPost = async () => {
-      try {
-        const post = await getSinglePost(postId).unwrap();
-        setSinglePost(post);
-
-        if (post?.author) {
-          const author = await creatorFind({ creatorId: post.author }).unwrap();
-          setPostAuthor(author);
-        }
-      } catch (err) {
-        toast.error(err.message);
-      }
-    };
-
-    findPost();
-  }, [postId]);
-
-  const formattedDate = moment(singlePost.createdAt)
-    .utc()
-    .format("DD/MMMM")
-    .split("/")
-    .join(" ");
+  const formattedDate = moment(singlePost.createdAt).utc().format("DD/MMMM").split("/").join(" ");
 
   return (
     <div className="single-post-container">
       <div className="single-post-reactions"></div>
       <div className="single-post-content">
         <div className="post-header">
-          <NavLink to={`/creator/${postAuthor.username}`}>
+          <NavLink to={`/creator/${author.username}`}>
             <div className="author">
               <div className="author-img">
-                <img src={postAuthor.imageUrl} alt={postAuthor.username}/>
+                <img src={author.imageUrl} alt={author.username} />
               </div>
               <div className="author-data">
-                <h4>{postAuthor.username}</h4>
+                <h4>{author.username}</h4>
                 <p>Posted on: {formattedDate}</p>
                 {/* <p>{formattedDate}</p> */}
               </div>
@@ -79,7 +48,7 @@ const SinglePost = () => {
         </div>
         <div className="post-content">
           <h1>{singlePost.title}</h1>
-          <img src={singlePost.imageUrl} alt={singlePost.title}/>
+          <img src={singlePost.imageUrl} alt={singlePost.title} />
           <div className="tags-and-reactions">
             <div className="tags">
               {singlePost.tags?.map((tag) => (
@@ -104,24 +73,28 @@ const SinglePost = () => {
               onCommentAdded={handleComments}
             />
             <div className="comments">
-              {singlePost.comments?.length <=0 ? <p className="no-comments">No Comments</p> : <SinglePostCommentsList comments={singlePost?.comments}/>}
+              {singlePost.comments?.length <= 0 ? (
+                <p className="no-comments">No Comments</p>
+              ) : (
+                <SinglePostCommentsList comments={singlePost?.comments} />
+              )}
             </div>
           </div>
         </div>
       </div>
       <div className="single-post-author">
         <div className="author-info">
-          <Author {...postAuthor} />
+          <Author {...author} />
         </div>
 
         <div className="author-posts">
           <h3>
             More from{" "}
-            <NavLink to={`/creator/${postAuthor.username}`}>
-              {postAuthor.username}
+            <NavLink to={`/creator/${author.username}`}>
+              {author.username}
             </NavLink>
           </h3>
-          <AuthorPostsList creator={postAuthor}></AuthorPostsList>
+          <AuthorPostsList author={author}></AuthorPostsList>
         </div>
       </div>
     </div>

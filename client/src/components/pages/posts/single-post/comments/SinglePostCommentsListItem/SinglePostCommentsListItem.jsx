@@ -1,32 +1,12 @@
-import { useEffect, useState } from "react";
-import { useCreatorFindMutation } from "../../../../../../redux/slices/userApiSlice";
 import "./SinglePostCommentsListItem.style.scss";
 import { NavLink } from "react-router";
+import { useAuthor } from "../../../../../hooks/useAuthor";
 import moment from "moment";
-export const SinglePostCommentsListItem = ({
-  authorId,
-  comment,
-  createdAt,
-}) => {
-  const [author, setAuthor] = useState({});
 
-  const [findCreator] = useCreatorFindMutation();
+export const SinglePostCommentsListItem = ({authorId,comment,createdAt}) => {
 
-  const formattedDate = moment(createdAt)
-    .utc()
-    .format("DD/MMMM")
-    .split("/")
-    .join(" ");
-
-  useEffect(() => {
-    const findAuthor = async () => {
-      try {
-        const creator = await findCreator({ creatorId: authorId }).unwrap();
-        setAuthor(creator);
-      } catch (err) {}
-    };
-    findAuthor();
-  }, []);
+  const {author} = useAuthor(authorId);
+  const formattedDate = moment(createdAt).utc().format("DD/MMMM").split("/").join(" ");
 
   return (
     <div className="comments-container">

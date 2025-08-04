@@ -14,8 +14,8 @@ const initialValues = {
   profilePictureUrl:''
 }
 
-
 const Register = () => {
+
   const [formValues,setFormValues] = useState(initialValues);
   const dispatch = useDispatch()
   const navigate = useNavigate();
