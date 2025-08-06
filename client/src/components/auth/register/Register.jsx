@@ -11,7 +11,8 @@ const initialValues = {
   email:'',
   password:'',
   rePassword:'',
-  profilePictureUrl:''
+  profilePictureUrl:'',
+  summary:'',
 }
 
 const Register = () => {
@@ -59,10 +60,14 @@ const Register = () => {
           return toast.error('Profile Picture URL is required!')
         }
 
+          if(!formValues.summary){
+          return toast.error('Summary is required!')
+        }
+
 
         try {
-          const {username,email,password,profilePictureUrl} = formValues;
-          const response = await register({username,email,password,profilePictureUrl}).unwrap();
+          const {username,email,password,profilePictureUrl,summary} = formValues;
+          const response = await register({username,email,password,profilePictureUrl,summary}).unwrap();
           dispatch(setCredentials({...response}));
           navigate('/');
         }catch(err){
@@ -88,6 +93,9 @@ const Register = () => {
           </div>
           <div className="form-group">
             <input type="text" placeholder="Profile Picture URL" name="profilePictureUrl" value={formValues.profilePictureUrl} onChange={changeHandler}/> {/* TODO add from computer */}
+          </div>
+           <div className="form-group">
+            <textarea type="text" rows={10} placeholder="Summary" name="summary" onChange={changeHandler} value={formValues.summary}></textarea> {/* TODO add from computer */}
           </div>
           <div className="form-group-terms">
            <input type="checkbox" id="terms"/>

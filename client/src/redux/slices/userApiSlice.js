@@ -26,12 +26,26 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         }),
         creatorFind:builder.mutation({
             query:(creatorId)=>({
-                url:`${USER_URL}/creator`,
+                url:`${USER_URL}/author`,
                 method:'POST',
                 body:creatorId
+            })
+        }),
+        followAuthor:builder.mutation({
+            query:(data)=>({
+                url:'/api/author/follow',
+                method: 'POST',
+                body:data,
+            })
+        }),
+        unfollowAuthor:builder.mutation({
+            query:(data)=>({
+                url:'/api/author/unfollow',
+                method: 'POST',
+                body:data,
             })
         })
     })
 })
 
-export const {useLoginMutation,useLogoutMutation,useRegisterMutation,useCreatorFindMutation} = usersApiSlice;
+export const {useLoginMutation,useLogoutMutation,useRegisterMutation,useCreatorFindMutation,useFollowAuthorMutation,useUnfollowAuthorMutation} = usersApiSlice;

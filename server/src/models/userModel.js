@@ -16,7 +16,11 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    profilePictureUrl:{
+    profilePictureUrl: {
+      type: String,
+      required: true,
+    },
+    summary:{
       type:String,
       required:true,
     },
@@ -30,6 +34,12 @@ const userSchema = new mongoose.Schema(
       {
         type: mongoose.Types.ObjectId,
         ref: "Posts",
+      },
+    ],
+    followers: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: "Users",
       },
     ],
   },

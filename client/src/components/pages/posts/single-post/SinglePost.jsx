@@ -1,10 +1,6 @@
-import { useEffect, useState } from "react";
 import "./SinglePost.style.scss";
 import { useSelector } from "react-redux";
 import { NavLink, useParams } from "react-router";
-import { useGetSinglePostMutation } from "../../../../redux/slices/postsApiSlice";
-import { useCreatorFindMutation } from "../../../../redux/slices/userApiSlice";
-import { toast } from "react-toastify";
 import { FaRegBookmark } from "react-icons/fa6";
 import Author from "./author/Author";
 import AuthorPostsList from "./author/authorPostsList/AuthorPostsList";
@@ -20,7 +16,7 @@ const SinglePost = () => {
   const { postId } = useParams();
 
   const { singlePost, handleComments } = useSinglePost(postId);
-  const { author } = useAuthor(singlePost.author);
+  const { author,handleAuthor} = useAuthor(singlePost.author);
 
   const formattedDate = moment(singlePost.createdAt).utc().format("DD/MMMM").split("/").join(" ");
 
@@ -84,7 +80,7 @@ const SinglePost = () => {
       </div>
       <div className="single-post-author">
         <div className="author-info">
-          <Author {...author} />
+          <Author author={author} onFollowChange={handleAuthor}/>
         </div>
 
         <div className="author-posts">

@@ -23,15 +23,12 @@ const PostComments = ({ userInfo, postId, singlePost, onCommentAdded }) => {
     e.preventDefault();
     
     try {
-      const result = await commentPost({
-        postId,
-        userComment: {
-          authorId: userComment.authorId,
-          comment: userComment.comment,
-        },
-      }).unwrap();
+      const result = await commentPost({postId,userComment: {authorId: userComment.authorId,comment: userComment.comment}}).unwrap();
+      
       onCommentAdded(result);
+      
       setUserComment(initialState);
+      
     } catch (err) {
       toast.error(err.message);
     }

@@ -18,7 +18,7 @@ export const useCreatePost = () => {
   const [createPost] = useCreatePostMutation();
 
   const navigate = useNavigate();
-
+ 
   const changeHandler = (e) => {
     setFormValues((oldValues) => ({
       ...oldValues,

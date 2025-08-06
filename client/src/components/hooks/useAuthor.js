@@ -8,6 +8,13 @@ export const useAuthor = (creatorId) =>{
     const [author,setAuthor] = useState({});
     const [getAuthor,{isLoading}] = useCreatorFindMutation();
 
+     const handleAuthor = (authorData) => {
+        setAuthor((oldState) => ({
+      ...oldState,
+      ...authorData,
+    }));
+  };
+
     useEffect(()=>{
         const findAuthor = async()=>{
             try{
@@ -22,5 +29,5 @@ export const useAuthor = (creatorId) =>{
         }
     },[creatorId]);
     
-    return {author,isLoading};
+    return {author,isLoading,handleAuthor};
 }

@@ -1,7 +1,7 @@
 const { User } = require("../models/userModel");
 const bcryptjs = require('bcryptjs');
 
-async function register(username,email,password,profilePictureUrl) {
+async function register(username,email,password,profilePictureUrl,summary) {
     const existingUser = await User.findOne({email})
 
     if(existingUser){
@@ -13,9 +13,10 @@ async function register(username,email,password,profilePictureUrl) {
         email,
         password: await bcryptjs.hash(password,10),
         profilePictureUrl,
+        summary
     })
     
-    user.save();
+    await user.save();
     return user;
 }
 
@@ -36,18 +37,52 @@ async function login(email,password) {
 
 }
 
-async function findCreator(creatorId) {
-    const user = await User.findById(creatorId);
+async function findAuthor(authorId) {
+    const user = await User.findById(authorId);
 
     if(!user){
-        throw new Error('Creator not found!');
+        throw new Error('Author not found!');
     }
 
     return user;
     
 }
 
+async function followAuthor(authorId,userId) {
+    const author = await User.findById(authorId);
+
+    if(!author){
+        throw new Error('Author not found');
+    }
+
+    if(author.followers.includes(userId)){
+        throw new Error('You are already a follower!');
+    }
+
+    author.followers.push(userId);
+    await author.save();
+
+    return author
+}
+
+async function unfollowAuthor(authorId,userId) {
+    const author = await User.findById(authorId);
+
+    if(!author){
+        throw new Error('Author not found!');
+    }
+
+    if(!author.followers.includes(userId)){
+        throw new Error('You are not a follower!')
+    }
+
+    author.followers.pull(userId);
+    await author.save();
+
+    return author;
+}
+
 
 module.exports= {
-    register,login,findCreator
+    register,login,findAuthor,followAuthor,unfollowAuthor
 }
