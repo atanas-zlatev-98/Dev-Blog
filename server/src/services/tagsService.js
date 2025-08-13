@@ -13,4 +13,14 @@ async function createTag(tag, postId) {
   }
 }
 
-module.exports = { createTag };
+async function findTag(tag) {
+    const tagFound = await Tags.findOne({tag});
+
+    if(!tagFound){
+        throw new Error('There are no tags with this name');
+    }
+
+    return tagFound
+}
+
+module.exports = { createTag,findTag};
