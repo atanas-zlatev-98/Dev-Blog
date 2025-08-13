@@ -1,5 +1,6 @@
 const { Post } = require("../models/postsModel");
 const { User } = require("../models/userModel");
+const { createTag } = require("./tagsService");
 
 async function createPost(post) {
   const newPost = new Post({
@@ -9,6 +10,10 @@ async function createPost(post) {
     imageUrl: post.imageUrl,
     tags:post.tags,
   });
+
+  if(newPost.tags.length > 0){
+    newPost.tags.map(tag => createTag(tag,newPost._id));
+  }
 
   const userId = post.author;
   const user = await User.findById(userId);
