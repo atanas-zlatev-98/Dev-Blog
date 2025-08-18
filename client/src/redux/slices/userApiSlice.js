@@ -25,10 +25,10 @@ export const usersApiSlice = apiSlice.injectEndpoints({
             })
         }),
         creatorFind:builder.mutation({
-            query:(creatorId)=>({
-                url:`${USER_URL}/author`,
-                method:'POST',
-                body:creatorId
+            query:(author)=>({
+                url:`${USER_URL}/${author}`,
+                method:'GET',
+                // body:creatorId
             })
         }),
         followAuthor:builder.mutation({

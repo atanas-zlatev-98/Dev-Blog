@@ -3,9 +3,9 @@ import { NavLink } from "react-router";
 import { useAuthor } from "../../../../../hooks/useAuthor";
 import moment from "moment";
 
-export const SinglePostCommentsListItem = ({authorId,comment,createdAt}) => {
+export const SinglePostCommentsListItem = ({author:authorName,comment,createdAt}) => {
 
-  const {author} = useAuthor(authorId);
+  const {author} = useAuthor(authorName);
   const formattedDate = moment(createdAt).utc().format("DD/MMMM").split("/").join(" ");
 
   return (

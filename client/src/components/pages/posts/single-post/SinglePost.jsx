@@ -16,7 +16,8 @@ const SinglePost = () => {
   const { postId } = useParams();
 
   const { singlePost, handleComments } = useSinglePost(postId);
-  const { author,handleAuthor} = useAuthor(singlePost.author);
+  // console.log(singlePost);
+  const { author,handleAuthor} = useAuthor(singlePost.author?.username);
 
   const formattedDate = moment(singlePost.createdAt).utc().format("DD/MMMM").split("/").join(" ");
 

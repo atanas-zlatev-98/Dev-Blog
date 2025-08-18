@@ -98,11 +98,11 @@ postController.put("/api/posts/:postId/react", async (req, res) => {});
 
 postController.post('/api/posts/:postId/comment',async(req,res)=>{
 
-  const {authorId,comment} = req.body;
+  const {author,comment} = req.body;
   const postId = req.params.postId;
 
   try{
-    const result = await postComment(postId,{authorId,comment})
+    const result = await postComment(postId,{author,comment})
 
     if(result){
       res.status(201).json(result);

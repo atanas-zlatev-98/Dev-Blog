@@ -46,12 +46,12 @@ async function deletePost(postId, userId) {
 }
 
 async function getPosts() {
-  const posts = await Post.find().sort({createdAt: -1});
+  const posts = await Post.find().sort({createdAt: -1}).populate('author','username');
   return posts;
 }
 
 async function getSinglePost(postId) {
-  const post = await Post.findById(postId);
+  const post = await Post.findById(postId).populate('author','username');;
 
   if (!post) {
     throw new Error("Post Not Found!");
@@ -77,7 +77,7 @@ async function updatePost(postId,userId,postData) {
 
 async function postComment(postId,commentData) {
   
-  const post = await Post.findById(postId);
+  const post = await Post.findById(postId)
 
   if(!post){
     throw new Error('Post Not Found!');

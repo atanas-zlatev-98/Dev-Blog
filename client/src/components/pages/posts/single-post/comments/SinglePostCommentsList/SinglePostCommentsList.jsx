@@ -2,7 +2,7 @@ import React from "react";
 import { SinglePostCommentsListItem } from "../SinglePostCommentsListItem/SinglePostCommentsListItem";
 import "./SinglePostCommentsList.style.scss";
 
-const SinglePostCommentsList = ({ comments }) => {
+const SinglePostCommentsList = ({ comments,author }) => {
   return (
     <div className="comments">
       {comments?.map((comment) => (

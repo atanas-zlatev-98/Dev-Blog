@@ -37,8 +37,10 @@ async function login(email,password) {
 
 }
 
-async function findAuthor(authorId) {
-    const user = await User.findById(authorId);
+async function findAuthor(author) {
+    console.log(author);
+    const user = await User.findOne({username:author});
+    console.log(user);
 
     if(!user){
         throw new Error('Author not found!');

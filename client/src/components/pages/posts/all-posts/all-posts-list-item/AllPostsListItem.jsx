@@ -4,9 +4,8 @@ import { FaRegComment, FaRegBookmark } from "react-icons/fa6";
 import { useAuthor } from "../../../../hooks/useAuthor";
 import moment from "moment";
 
-const AllPostsListItem = ({_id,title,author:authorId,createdAt,tags,comments,reactions}) => {
-  
-  const {author,isLoading} = useAuthor(authorId);
+const AllPostsListItem = ({_id,title,author:authorName,createdAt,tags,comments,reactions}) => {
+  const {author,isLoading} = useAuthor(authorName.username);
 
   const formattedDate = moment(createdAt).utc().format("DD/MMMM").split("/").join(" ");
 

@@ -55,10 +55,13 @@ userController.get('/profile',async(req,res)=>{
   
 })
 
-userController.post('/api/auth/author',async(req,res)=>{
-  const {creatorId} = req.body;
+userController.get('/api/auth/:author',async(req,res)=>{
+  // const {creatorId} = req.body;
+  const author = req.params.author;
   try{
-    const user = await findAuthor(creatorId);
+    const user = await findAuthor(author);
+    console.log(user);
+    console
     res.status(200).json({_id:user._id,username:user.username,email:user.email,posts:user.posts,imageUrl:user.profilePictureUrl,summary:user.summary,createdAt:user.createdAt,followers:user.followers});
   }catch(err){
     res.status(404).json(err.message);
