@@ -3,11 +3,12 @@ import { useGetAllPostsMutation } from "../../../../../redux/slices/postsApiSlic
 import { toast } from "react-toastify";
 import AllPostsListItem from "../all-posts-list-item/AllPostsListItem";
 import './AllPostsLists.style.scss';
+import SkeletonCard from "../../../../skeleton/card/SkeletonCard";
 
 const AllPostsList = () => {
   const [allPosts, setAllPosts] = useState([]);
 
-  const [getAllPosts] = useGetAllPostsMutation();
+  const [getAllPosts,{isLoading}] = useGetAllPostsMutation();
 
   useEffect(() => {
     const getPosts = async () => {
@@ -24,9 +25,10 @@ const AllPostsList = () => {
 
   return (
     <div className="posts-container">
-      {allPosts.map((post) => (
+      {isLoading ? ([...Array(5)].map((_,i)=><SkeletonCard key={i}/>)) :( allPosts.map((post) => (
         <AllPostsListItem key={post._id} {...post} />
-      ))}
+      )))}
+      
     </div>
   );
 };

@@ -9,20 +9,22 @@ import moment from "moment";
 import SinglePostCommentsList from "./comments/SinglePostCommentsList/SinglePostCommentsList";
 import { useSinglePost } from "../../../hooks/useSinglePost";
 import { useAuthor } from "../../../hooks/useAuthor";
+import SkeletonSinglePage from "../../../skeleton/single-page/SkeletonSinglePage";
 
 const SinglePost = () => {
 
   const { userInfo } = useSelector((state) => state.auth);
   const { postId } = useParams();
 
-  const { singlePost, handleComments } = useSinglePost(postId);
+  const { singlePost, handleComments,isLoading,isLoaded } = useSinglePost(postId);
   // console.log(singlePost);
   const { author,handleAuthor} = useAuthor(singlePost.author?.username);
 
   const formattedDate = moment(singlePost.createdAt).utc().format("DD/MMMM").split("/").join(" ");
-
+  
   return (
-    <div className="single-post-container">
+    <>
+    {isLoading && !isLoaded ? (<SkeletonSinglePage/>) : (<div className="single-post-container">
       <div className="single-post-reactions"></div>
       <div className="single-post-content">
         <div className="post-header">
@@ -94,7 +96,9 @@ const SinglePost = () => {
           <AuthorPostsList author={author}></AuthorPostsList>
         </div>
       </div>
-    </div>
+    </div>)}
+    </>
+    
   );
 };
 

@@ -4,13 +4,17 @@ import { toast } from "react-toastify";
 
 export const useSinglePost = (postId) => {
   const [singlePost, setSinglePost] = useState({});
-  const [getSinglePost] = useGetSinglePostMutation();
+  const [getSinglePost, { isLoading }] = useGetSinglePostMutation();
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     const findPost = async () => {
       try {
         const post = await getSinglePost(postId).unwrap();
-        setSinglePost(post);
+        if (post) {
+          setSinglePost(post);
+          setIsLoaded(true);
+        }
       } catch (err) {
         toast.error(err.message || "Failed to load post!");
       }
@@ -19,7 +23,7 @@ export const useSinglePost = (postId) => {
     if (postId) {
       findPost();
     }
-  }, [postId]);
+  }, [postId, getSinglePost]);
 
   const handleComments = (postData) => {
     setSinglePost((oldState) => ({
@@ -29,5 +33,5 @@ export const useSinglePost = (postId) => {
     }));
   };
 
-  return { singlePost, handleComments };
+  return { singlePost, handleComments, isLoading, isLoaded };
 };
